@@ -1,0 +1,30 @@
+version: '3'
+services:
+   
+  book-library:
+    platform: linux/amd64 
+    image: bookf
+    build: 
+      context: ./book_catalog
+      dockerfile: Dockerfile
+    container_name: bookf
+    ports:
+     - "8080:8080"
+    environment:
+      - PORT=8080
+      - DATABASE_URL=postgresql://book_sit_722_user:ETz7lCG5W8OhN5IE4QKMcNmXJFflEfyN@dpg-crfugjbv2p9s73a3g3i0-a.oregon-postgres.render.com/book_sit_722
+    restart: "no"
+
+  book-inventory:
+    platform: linux/amd64 
+    image: inventoryf
+    build: 
+      context: ./inventory_management
+      dockerfile: Dockerfile
+    container_name: inventoryf
+    ports:
+     - "8081:8081"
+    environment:
+      - PORT=8081
+      - DATABASE_URL=postgresql://book_sit_722_user:ETz7lCG5W8OhN5IE4QKMcNmXJFflEfyN@dpg-crfugjbv2p9s73a3g3i0-a.oregon-postgres.render.com/book_sit_722
+    restart: "no"
